@@ -85,6 +85,13 @@ namespace Option_ROR
             set => SetField(ref _totalGain, value);
         }
 
+        private double _movementToStrike;
+        public double MovementToStrike
+        {
+            get => _movementToStrike;
+            set => SetField(ref _movementToStrike, value);
+        }
+
         private double _ror;
         public double Ror
         {
@@ -99,9 +106,18 @@ namespace Option_ROR
             CapitalGain = Math.Max(StrikePrice - SharePrice, 0);
             TotalGain = CapitalGain + ExtrinsicValue;
 
+            if (SharePrice > 0)
+            {
+                MovementToStrike = ((StrikePrice - SharePrice) / SharePrice) * 100;
+            }
+            else
+            {
+                MovementToStrike = 0;
+            }
+
             if (NumberOfDays > 0 && SharePrice > 0)
             {
-                Ror = (TotalGain / SharePrice) * (365f / NumberOfDays);
+                Ror = ((TotalGain / SharePrice) * (365f / NumberOfDays)) * 100;
             }
             else
             {

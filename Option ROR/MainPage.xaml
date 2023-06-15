@@ -23,7 +23,7 @@
     <VerticalStackLayout>
         <Grid>
             <Grid.RowDefinitions>
-                <RowDefinition Height="70"/>
+                <RowDefinition Height="50"/>
                 <RowDefinition Height="*"/>
                 <RowDefinition Height="70"/>
                 <RowDefinition Height="*"/>
@@ -34,7 +34,7 @@
             </Grid.ColumnDefinitions>
             <Label Grid.Column="0"
                    Grid.Row="0"
-                   Text="Option price"
+                   Text="Option Price"
                    VerticalOptions="End"
                    HorizontalOptions="Center"/>
 
@@ -48,7 +48,7 @@
 
             <Label Grid.Column="1"
                    Grid.Row="0"
-                   Text="Share price"
+                   Text="Share Price"
                    VerticalOptions="End"
                    HorizontalOptions="Center"/>
 
@@ -62,7 +62,7 @@
 
             <Label Grid.Column="0"
                    Grid.Row="2"
-                   Text="Strike price"
+                   Text="Strike Price"
                    VerticalOptions="End"
                    HorizontalOptions="Center"/>
 
@@ -95,27 +95,30 @@
                 <RowDefinition Height="*"/>
                 <RowDefinition Height="*"/>
                 <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
             </Grid.RowDefinitions>
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="200"/>
                 <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="100"/>
             </Grid.ColumnDefinitions>
 
             <Label Grid.Row="0" Grid.Column="0" Text="Intrinsic Value"/>
-            <Label Grid.Row="0" Grid.Column="1" Text="{Binding IntrinsicValue, StringFormat='{0:F3}'}" HorizontalOptions="Start"/>
+            <Label Grid.Row="0" Grid.Column="1" Text="{Binding IntrinsicValue, StringFormat='{0:F2}'}" HorizontalOptions="Start"/>
 
             <Label Grid.Row="1" Grid.Column="0" Text="Extrinsic Value"/>
-            <Label Grid.Row="1" Grid.Column="1" Text="{Binding ExtrinsicValue, StringFormat='{0:F3}'}" HorizontalOptions="Start"/>
+            <Label Grid.Row="1" Grid.Column="1" Text="{Binding ExtrinsicValue, StringFormat='{0:F2}'}" HorizontalOptions="Start"/>
 
             <Label Grid.Row="2" Grid.Column="0" Text="Capital Gain"/>
-            <Label Grid.Row="2" Grid.Column="1" Text="{Binding CapitalGain, StringFormat='{0:F3}'}" HorizontalOptions="Start"/>
+            <Label Grid.Row="2" Grid.Column="1" Text="{Binding CapitalGain, StringFormat='{0:F2}'}" HorizontalOptions="Start"/>
             
             <Label Grid.Row="3" Grid.Column="0" Text="Total Gain"/>
-            <Label Grid.Row="3" Grid.Column="1" Text="{Binding TotalGain, StringFormat='{0:F3}'}" HorizontalOptions="Start"/>
-           
-            <Label Grid.Row="4" Grid.Column="0" Text="ROR"/>
-            <Label Grid.Row="4" Grid.Column="1" Text="{Binding Ror, StringFormat='{0:F3}'}" HorizontalOptions="Start"/>
+            <Label Grid.Row="3" Grid.Column="1" Text="{Binding TotalGain, StringFormat='{0:F2}'}" HorizontalOptions="Start"/>
 
+            <Label Grid.Row="4" Grid.Column="0" Text="Movement to Strike"/>
+            <Label Grid.Row="4" Grid.Column="1" Text="{Binding MovementToStrike, StringFormat='{0:F2}%'}" HorizontalOptions="Start"/>
+
+            <Label Grid.Row="5" Grid.Column="0" Text="ROR"/>
+            <Label Grid.Row="5" Grid.Column="1" Text="{Binding Ror, StringFormat='{0:F2}%'}" HorizontalOptions="Start"/>
 
         </Grid>
     </VerticalStackLayout>
