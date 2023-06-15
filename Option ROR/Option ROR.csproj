@@ -55,4 +55,6 @@
 	  <Folder Include="Resources\Splash\" />
 	</ItemGroup>
 
+	<ProjectExtensions><VisualStudio><UserProperties XamarinHotReloadDebuggerExceptionOptionRORHideInfoBar="True" XamarinHotReloadGenericExceptionInfoBarOptionRORHideInfoBar="True" /></VisualStudio></ProjectExtensions>
+
 </Project>

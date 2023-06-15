@@ -13,15 +13,27 @@ namespace Option_ROR
         public event PropertyChangedEventHandler PropertyChanged;
 
         private double _optionPrice;
-        public double OptionPrice //per contract -- 100 shares
+        public double OptionPrice
         {
             get => _optionPrice;
             set
             {
                 SetField(ref _optionPrice, value);
-                CalculateRor();
+                CalculateDerived();
             }
         }
+
+        private double _strikePrice;
+        public double StrikePrice
+        {
+            get => _strikePrice;
+            set
+            {
+                SetField(ref _strikePrice, value);
+                CalculateDerived();
+            }
+        }
+
 
         private double _sharePrice;
         public double SharePrice
@@ -30,7 +42,7 @@ namespace Option_ROR
             set
             {
                 SetField(ref _sharePrice, value);
-                CalculateRor();
+                CalculateDerived();
             }
         }
 
@@ -41,8 +53,36 @@ namespace Option_ROR
             set
             {
                 SetField(ref _numberOfDays, value);
-                CalculateRor();
+                CalculateDerived();
             }
+        }
+
+        private double _intrinsicValue;
+        public double IntrinsicValue
+        {
+            get => _intrinsicValue;
+            set => SetField(ref _intrinsicValue, value);
+        }
+
+        private double _extrinsicValue;
+        public double ExtrinsicValue
+        {
+            get => _extrinsicValue;
+            set => SetField(ref _extrinsicValue, value);
+        }
+
+        private double _capitalGain;
+        public double CapitalGain
+        {
+            get => _capitalGain;
+            set => SetField(ref _capitalGain, value);
+        }
+
+        private double _totalGain;
+        public double TotalGain
+        {
+            get => _totalGain;
+            set => SetField(ref _totalGain, value);
         }
 
         private double _ror;
@@ -52,23 +92,26 @@ namespace Option_ROR
             set => SetField(ref _ror, value);
         }
 
-        public MainViewModel() { }
-
-        protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
+        private void CalculateDerived()
         {
-            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
-        }
+            IntrinsicValue = Math.Max(SharePrice - StrikePrice, 0);
+            ExtrinsicValue = OptionPrice - IntrinsicValue;
+            CapitalGain = Math.Max(StrikePrice - SharePrice, 0);
+            TotalGain = CapitalGain + ExtrinsicValue;
 
-        private void CalculateRor()
-        {
-            if (SharePrice > 0 && NumberOfDays > 0)
+            if (NumberOfDays > 0 && SharePrice > 0)
             {
-                Ror = ((OptionPrice / 100) / SharePrice) * (365f / NumberOfDays);
+                Ror = (TotalGain / SharePrice) * (365f / NumberOfDays);
             }
             else
             {
                 Ror = 0;
             }
+        }
+
+        protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
+        {
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
 
         protected bool SetField<T>(ref T field, T value, [CallerMemberName] string propertyName = null)

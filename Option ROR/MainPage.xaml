@@ -21,26 +21,102 @@
     </ContentPage.Resources>
 
     <VerticalStackLayout>
-        <Label Text="Option ROR" HorizontalOptions="Center" Margin="0,20,0,0"/>
-        <Label Text="Option price" HorizontalOptions="Center" Margin="0,20,0,0"/>
-        <Entry Text="{Binding OptionPrice}"
-               Focused="Entry_OnFocused"
-               Keyboard="Numeric"
-               HorizontalOptions="Center"
-               Margin="0,10,0,0"/>
-        <Label Text="Share Price" HorizontalOptions="Center" Margin="0,20,0,0"/>
-        <Entry Text="{Binding SharePrice}"
-               Focused="Entry_OnFocused"
-               Keyboard="Numeric"
-               HorizontalOptions="Center"
-               Margin="0,10,0,0"/>
-        <Label Text="Number of days" HorizontalOptions="Center" Margin="0,20,0,0"/>
-        <Entry Text="{Binding NumberOfDays}"
-               Focused="Entry_OnFocused"
-               Keyboard="Numeric"
-               HorizontalOptions="Center"
-               Margin="0,10,0,0"/>
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="70"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="70"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+            <Label Grid.Column="0"
+                   Grid.Row="0"
+                   Text="Option price"
+                   VerticalOptions="End"
+                   HorizontalOptions="Center"/>
 
-        <Label Text="{Binding Ror, StringFormat='{0:F3}'}" HorizontalOptions="Center" Margin="0,20,0,0"/>
+            <Entry Grid.Column="0"
+                   Grid.Row="1"
+                   Text="{Binding OptionPrice}"
+                   Focused="Entry_OnFocused"
+                   Keyboard="Numeric"
+                   HorizontalTextAlignment="Center"
+                   HorizontalOptions="Center"/>
+
+            <Label Grid.Column="1"
+                   Grid.Row="0"
+                   Text="Share price"
+                   VerticalOptions="End"
+                   HorizontalOptions="Center"/>
+
+            <Entry Grid.Column="1"
+                   Grid.Row="1" 
+                   Text="{Binding SharePrice}"
+                   Focused="Entry_OnFocused"
+                   Keyboard="Numeric"
+                   HorizontalTextAlignment="Center"
+                   HorizontalOptions="Center"/>
+
+            <Label Grid.Column="0"
+                   Grid.Row="2"
+                   Text="Strike price"
+                   VerticalOptions="End"
+                   HorizontalOptions="Center"/>
+
+            <Entry Grid.Column="0"
+                   Grid.Row="3"
+                   Text="{Binding StrikePrice}"
+                   Focused="Entry_OnFocused"
+                   Keyboard="Numeric"
+                   HorizontalTextAlignment="Center"
+                   HorizontalOptions="Center"/>
+
+            <Label Grid.Column="1"
+                   Grid.Row="2"
+                   Text="Number of Days"
+                   VerticalOptions="End"
+                   HorizontalOptions="Center"/>
+
+            <Entry Grid.Column="1"
+                   Grid.Row="3"
+                   Text="{Binding NumberOfDays}"
+                   Focused="Entry_OnFocused"
+                   Keyboard="Numeric"
+                   HorizontalTextAlignment="Center"
+                   HorizontalOptions="Center"/>
+        </Grid>
+        <Grid Margin="20,50">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="200"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+
+            <Label Grid.Row="0" Grid.Column="0" Text="Intrinsic Value"/>
+            <Label Grid.Row="0" Grid.Column="1" Text="{Binding IntrinsicValue, StringFormat='{0:F3}'}" HorizontalOptions="Start"/>
+
+            <Label Grid.Row="1" Grid.Column="0" Text="Extrinsic Value"/>
+            <Label Grid.Row="1" Grid.Column="1" Text="{Binding ExtrinsicValue, StringFormat='{0:F3}'}" HorizontalOptions="Start"/>
+
+            <Label Grid.Row="2" Grid.Column="0" Text="Capital Gain"/>
+            <Label Grid.Row="2" Grid.Column="1" Text="{Binding CapitalGain, StringFormat='{0:F3}'}" HorizontalOptions="Start"/>
+            
+            <Label Grid.Row="3" Grid.Column="0" Text="Total Gain"/>
+            <Label Grid.Row="3" Grid.Column="1" Text="{Binding TotalGain, StringFormat='{0:F3}'}" HorizontalOptions="Start"/>
+           
+            <Label Grid.Row="4" Grid.Column="0" Text="ROR"/>
+            <Label Grid.Row="4" Grid.Column="1" Text="{Binding Ror, StringFormat='{0:F3}'}" HorizontalOptions="Start"/>
+
+
+        </Grid>
     </VerticalStackLayout>
 </ContentPage>
