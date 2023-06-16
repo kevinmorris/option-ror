@@ -2,6 +2,7 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:local="clr-namespace:Option_ROR"
+             xmlns:mct="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
              x:Class="Option_ROR.MainPage">
 
     <ContentPage.BindingContext>
@@ -23,23 +24,33 @@
     <VerticalStackLayout>
         <Grid>
             <Grid.RowDefinitions>
-                <RowDefinition Height="50"/>
+                <RowDefinition Height="60"/>
+                <RowDefinition Height="40"/>
                 <RowDefinition Height="*"/>
-                <RowDefinition Height="70"/>
+                <RowDefinition Height="50"/>
                 <RowDefinition Height="*"/>
             </Grid.RowDefinitions>
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="*"/>
                 <ColumnDefinition Width="*"/>
             </Grid.ColumnDefinitions>
+
+            <local:CallPutSwitch Grid.Column="0"
+                                 Grid.Row="0"
+                                 Grid.ColumnSpan="2"
+                                 Toggled="CallPutSwitch_OnToggled"
+                                 VerticalOptions="End"
+                                 HorizontalOptions="Center">
+            </local:CallPutSwitch>
+
             <Label Grid.Column="0"
-                   Grid.Row="0"
+                   Grid.Row="1"
                    Text="Option Price"
                    VerticalOptions="End"
                    HorizontalOptions="Center"/>
 
             <Entry Grid.Column="0"
-                   Grid.Row="1"
+                   Grid.Row="2"
                    Text="{Binding OptionPrice}"
                    Focused="Entry_OnFocused"
                    Keyboard="Numeric"
@@ -47,13 +58,13 @@
                    HorizontalOptions="Center"/>
 
             <Label Grid.Column="1"
-                   Grid.Row="0"
+                   Grid.Row="1"
                    Text="Share Price"
                    VerticalOptions="End"
                    HorizontalOptions="Center"/>
 
             <Entry Grid.Column="1"
-                   Grid.Row="1" 
+                   Grid.Row="2" 
                    Text="{Binding SharePrice}"
                    Focused="Entry_OnFocused"
                    Keyboard="Numeric"
@@ -61,13 +72,13 @@
                    HorizontalOptions="Center"/>
 
             <Label Grid.Column="0"
-                   Grid.Row="2"
+                   Grid.Row="3"
                    Text="Strike Price"
                    VerticalOptions="End"
                    HorizontalOptions="Center"/>
 
             <Entry Grid.Column="0"
-                   Grid.Row="3"
+                   Grid.Row="4"
                    Text="{Binding StrikePrice}"
                    Focused="Entry_OnFocused"
                    Keyboard="Numeric"
@@ -75,21 +86,22 @@
                    HorizontalOptions="Center"/>
 
             <Label Grid.Column="1"
-                   Grid.Row="2"
+                   Grid.Row="3"
                    Text="Number of Days"
                    VerticalOptions="End"
                    HorizontalOptions="Center"/>
 
             <Entry Grid.Column="1"
-                   Grid.Row="3"
+                   Grid.Row="4"
                    Text="{Binding NumberOfDays}"
                    Focused="Entry_OnFocused"
                    Keyboard="Numeric"
                    HorizontalTextAlignment="Center"
                    HorizontalOptions="Center"/>
         </Grid>
-        <Grid Margin="20,50">
+        <Grid Margin="20,25">
             <Grid.RowDefinitions>
+                <RowDefinition Height="*"/>
                 <RowDefinition Height="*"/>
                 <RowDefinition Height="*"/>
                 <RowDefinition Height="*"/>
@@ -99,7 +111,7 @@
             </Grid.RowDefinitions>
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="*"/>
-                <ColumnDefinition Width="100"/>
+                <ColumnDefinition Width="120"/>
             </Grid.ColumnDefinitions>
 
             <Label Grid.Row="0" Grid.Column="0" Text="Intrinsic Value"/>
@@ -117,8 +129,11 @@
             <Label Grid.Row="4" Grid.Column="0" Text="Movement to Strike"/>
             <Label Grid.Row="4" Grid.Column="1" Text="{Binding MovementToStrike, StringFormat='{0:F2}%'}" HorizontalOptions="Start"/>
 
-            <Label Grid.Row="5" Grid.Column="0" Text="ROR"/>
-            <Label Grid.Row="5" Grid.Column="1" Text="{Binding Ror, StringFormat='{0:F2}%'}" HorizontalOptions="Start"/>
+            <Label Grid.Row="5" Grid.Column="0" Text="Extrinsic ROR"/>
+            <Label Grid.Row="5" Grid.Column="1" Text="{Binding ExtrinsicRor, StringFormat='{0:F2}%'}" HorizontalOptions="Start"/>
+
+            <Label Grid.Row="6" Grid.Column="0" Text="Total ROR"/>
+            <Label Grid.Row="6" Grid.Column="1" Text="{Binding TotalRor, StringFormat='{0:F2}%'}" HorizontalOptions="Start"/>
 
         </Grid>
     </VerticalStackLayout>

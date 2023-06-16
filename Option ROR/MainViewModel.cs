@@ -5,12 +5,29 @@ using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Input;
 
 namespace Option_ROR
 {
     public class MainViewModel : INotifyPropertyChanged
     {
+        private int _typeMultiplier;
+
         public event PropertyChangedEventHandler PropertyChanged;
+
+        public ICommand CallPutToggledCommand { get; set; }
+
+        public MainViewModel()
+        {
+            CallPutToggledCommand = new Command<bool>(CallPutToggled);
+            _typeMultiplier = 1;
+        }
+
+        private void CallPutToggled(bool isCall)
+        {
+            _typeMultiplier = isCall ? 1 : -1;
+            CalculateDerived();
+        }
 
         private double _optionPrice;
         public double OptionPrice
@@ -92,16 +109,23 @@ namespace Option_ROR
             set => SetField(ref _movementToStrike, value);
         }
 
-        private double _ror;
-        public double Ror
+        private double _extrinsicRor;
+        public double ExtrinsicRor
         {
-            get => _ror;
-            set => SetField(ref _ror, value);
+            get => _extrinsicRor;
+            set => SetField(ref _extrinsicRor, value);
+        }
+
+        private double _totalRor;
+        public double TotalRor
+        {
+            get => _totalRor;
+            set => SetField(ref _totalRor, value);
         }
 
         private void CalculateDerived()
         {
-            IntrinsicValue = Math.Max(SharePrice - StrikePrice, 0);
+            IntrinsicValue = Math.Max(_typeMultiplier * (SharePrice - StrikePrice), 0);
             ExtrinsicValue = OptionPrice - IntrinsicValue;
             CapitalGain = Math.Max(StrikePrice - SharePrice, 0);
             TotalGain = CapitalGain + ExtrinsicValue;
@@ -117,11 +141,13 @@ namespace Option_ROR
 
             if (NumberOfDays > 0 && SharePrice > 0)
             {
-                Ror = ((TotalGain / SharePrice) * (365f / NumberOfDays)) * 100;
+                TotalRor = ((TotalGain / SharePrice) * (365f / NumberOfDays)) * 100;
+                ExtrinsicRor = ((ExtrinsicValue / SharePrice) * (365f / NumberOfDays)) * 100;
             }
             else
             {
-                Ror = 0;
+                ExtrinsicRor = 0;
+                TotalRor = 0;
             }
         }
 
