@@ -16,23 +16,24 @@ namespace Option_ROR
         public CallPutSwitch()
         {
             InitializeComponent();
-            Call.Style = (Style)Resources["Selected"];
             IsCall = true;
+            VisualStateManager.GoToState(Call, "Focused");
+            VisualStateManager.GoToState(Put, "Normal");
         }
 
         private void Call_Clicked(object sender, EventArgs e)
         {
             IsCall = true;
-            Call.Style = (Style)Resources["Selected"];
-            Put.Style = null;
+            VisualStateManager.GoToState(Call, "Focused");
+            VisualStateManager.GoToState(Put, "Normal");
             Toggled?.Invoke(this, IsCall);
         }
 
         private void Put_Clicked(object sender, EventArgs e)
         {
             IsCall = false;
-            Put.Style = (Style)Resources["Selected"];
-            Call.Style = null;
+            VisualStateManager.GoToState(Put, "Focused");
+            VisualStateManager.GoToState(Call, "Normal");
             Toggled?.Invoke(this, IsCall);
         }
     }
