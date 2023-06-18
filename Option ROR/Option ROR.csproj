@@ -33,8 +33,10 @@
 	<ItemGroup>
 		<!-- App Icon -->
     <MauiIcon Include="Resources\AppIcon\appicon.png" />
+    <EmbeddedResource Include="Resources\Splash\appicon.png" />
 
 		<!-- Splash Screen -->
+		<MauiSplashScreen Include="Resources\Splash\appicon.png" />
 
 		<!-- Images -->
 		<MauiImage Include="Resources\Images\*" />
@@ -48,12 +50,12 @@
 	</ItemGroup>
 
 	<ItemGroup>
-		<PackageReference Include="CommunityToolkit.Maui" Version="5.2.0" />
-		<PackageReference Include="Microsoft.Extensions.Logging.Debug" Version="7.0.0" />
+	  <None Remove="Resources\Splash\appicon.png" />
 	</ItemGroup>
 
 	<ItemGroup>
-	  <Folder Include="Resources\Splash\" />
+		<PackageReference Include="CommunityToolkit.Maui" Version="5.2.0" />
+		<PackageReference Include="Microsoft.Extensions.Logging.Debug" Version="7.0.0" />
 	</ItemGroup>
 
 	<ItemGroup>
