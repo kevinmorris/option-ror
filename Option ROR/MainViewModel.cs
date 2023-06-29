@@ -139,10 +139,11 @@ namespace Option_ROR
                 MovementToStrike = 0;
             }
 
-            if (NumberOfDays > 0 && SharePrice > 0)
+            var capital = _typeMultiplier > 0 ? SharePrice : StrikePrice;
+            if (NumberOfDays > 0 && SharePrice > 0 && capital > 0)
             {
                 TotalRor = ((TotalGain / SharePrice) * (365f / NumberOfDays)) * 100;
-                ExtrinsicRor = ((ExtrinsicValue / SharePrice) * (365f / NumberOfDays)) * 100;
+                ExtrinsicRor = ((ExtrinsicValue / capital) * (365f / NumberOfDays)) * 100;
             }
             else
             {
